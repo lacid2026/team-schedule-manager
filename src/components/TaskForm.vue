@@ -19,6 +19,7 @@ const form = ref({
   title: '',
   memberId: '',
   type: 'feature',
+  color: '#3b82f6',
   startDate: '',
   endDate: '',
 })
@@ -32,6 +33,7 @@ const initForm = () => {
       title: props.taskToEdit.title,
       memberId: props.taskToEdit.memberId,
       type: props.taskToEdit.type,
+      color: props.taskToEdit.color || '#3b82f6',
       startDate: format(props.taskToEdit.startDate, 'yyyy-MM-dd'),
       endDate: format(props.taskToEdit.endDate, 'yyyy-MM-dd'),
     }
@@ -42,6 +44,7 @@ const initForm = () => {
       title: '',
       memberId: props.initialMemberId || store.members[0].id,
       type: 'feature',
+      color: '#3b82f6',
       startDate: props.initialDate ? format(props.initialDate, 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd'),
       endDate: props.initialDate ? format(props.initialDate, 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd'),
     }
@@ -89,18 +92,31 @@ const remove = () => {
           >
         </div>
 
-        <!-- Type -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
-          <div class="flex gap-4">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input v-model="form.type" type="radio" value="feature" class="text-blue-600 focus:ring-blue-500">
-              <span class="text-sm text-gray-700">Feature Dev</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input v-model="form.type" type="radio" value="sr" class="text-emerald-600 focus:ring-emerald-500">
-              <span class="text-sm text-gray-700">Operation SR</span>
-            </label>
+        <!-- Type & Color -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input v-model="form.type" type="radio" value="feature" class="text-blue-600 focus:ring-blue-500">
+                <span class="text-sm text-gray-700">Feature</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input v-model="form.type" type="radio" value="sr" class="text-emerald-600 focus:ring-emerald-500">
+                <span class="text-sm text-gray-700">SR</span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Color</label>
+            <div class="flex items-center gap-2">
+              <input 
+                v-model="form.color" 
+                type="color" 
+                class="h-8 w-8 rounded cursor-pointer border-0 p-0"
+              >
+              <span class="text-sm text-gray-500">{{ form.color }}</span>
+            </div>
           </div>
         </div>
 

@@ -28,6 +28,7 @@ export const useSchedule = () => {
                 id: t.id,
                 title: t.title,
                 type: t.type,
+                color: t.color || (t.type === 'feature' ? '#3b82f6' : '#10b981'), // Fallback defaults
                 startDate: new Date(t.start_date),
                 endDate: new Date(t.end_date),
                 memberId: t.member_id
@@ -49,6 +50,7 @@ export const useSchedule = () => {
             .insert({
                 title: task.title,
                 type: task.type,
+                color: task.color,
                 start_date: task.startDate,
                 end_date: task.endDate,
                 member_id: task.memberId
@@ -66,6 +68,7 @@ export const useSchedule = () => {
             if (idx !== -1) {
                 store.tasks[idx] = {
                     ...data[0],
+                    color: data[0].color,
                     startDate: new Date(data[0].start_date),
                     endDate: new Date(data[0].end_date),
                     memberId: data[0].member_id
@@ -87,6 +90,7 @@ export const useSchedule = () => {
             .update({
                 title: updatedTask.title,
                 type: updatedTask.type,
+                color: updatedTask.color,
                 start_date: updatedTask.startDate,
                 end_date: updatedTask.endDate,
                 member_id: updatedTask.memberId

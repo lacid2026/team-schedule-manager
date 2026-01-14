@@ -182,8 +182,7 @@ const getTaskColor = (type) => {
                 v-for="task in getTasksByMember(member.id)" 
                 :key="task.id"
                 class="absolute top-1/2 -translate-y-1/2 h-8 rounded-full shadow-sm text-white text-xs flex items-center px-3 overflow-hidden cursor-pointer transition-all hover:shadow-md hover:scale-[1.02] z-10"
-                :class="getTaskColor(task.type)"
-                :style="getTaskStyle(task)"
+                :style="{ ...getTaskStyle(task), backgroundColor: task.color }"
                 :title="`${task.title} (${format(task.startDate, 'MMM d')} - ${format(task.endDate, 'MMM d')})`"
                 @click="(e) => openEditModal(task, e)"
               >
